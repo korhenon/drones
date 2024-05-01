@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
+    kotlin("plugin.serialization") version "1.9.0"
 }
 
 android {
@@ -70,6 +71,9 @@ dependencies {
 
     // Network
     implementation (libs.osmdroid.android)
+    implementation(platform("io.github.jan-tennert.supabase:bom:2.3.1"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.ktor:ktor-client-android:2.3.10")
     // Coroutines
     implementation (libs.kotlinx.coroutines.core)
     implementation (libs.kotlinx.coroutines.android)
@@ -79,4 +83,5 @@ dependencies {
     implementation (libs.hilt.android)
     kapt (libs.hilt.compiler)
     implementation (libs.androidx.hilt.navigation.compose)
+
 }

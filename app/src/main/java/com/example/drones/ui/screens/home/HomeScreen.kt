@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.drones.R
+import com.example.drones.data.utils.NavDestinations
 import com.example.drones.ui.components.CustomField
 import com.example.drones.ui.components.MaxWidthButton
 import com.example.drones.ui.components.OpenStreetMap
@@ -293,8 +295,8 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                     }
                     Spacer(modifier = Modifier.height(18.dp))
                     MaxWidthButton(text = "ORDER NOW", onClick = {
-                        viewModel.state =
-                            viewModel.state.copy(formState = HomeFormState.Confirmation)
+                        viewModel.state = viewModel.state.copy(formState = HomeFormState.Confirmation)
+                        viewModel.createOrder()
                     })
                 }
 
@@ -321,6 +323,10 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                                 .height(14.dp)
                                 .background(colorScheme.surface, CircleShape)
                         )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        MaxWidthButton(text = "Check my orders", onClick = {
+                            navController.navigate(NavDestinations.Orders)
+                        })
                     }
                 }
             }

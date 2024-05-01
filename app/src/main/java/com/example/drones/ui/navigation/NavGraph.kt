@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.drones.data.utils.NavDestinations
 import com.example.drones.ui.screens.home.HomeScreen
 import com.example.drones.ui.screens.onboard.OnboardScreen
+import com.example.drones.ui.screens.orders.OrdersScreen
 import com.example.drones.ui.screens.splash.SplashScreen
 
 @Composable
@@ -22,6 +23,9 @@ fun NavGraph() {
         }
         composable(NavDestinations.Home) {
             HomeScreen(navController)
+        }
+        composable(NavDestinations.Orders) {
+            OrdersScreen()
         }
     }
 }

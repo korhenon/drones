@@ -1,4 +1,4 @@
-package com.example.drones.ui.screens.home
+package com.example.drones.ui.screens.orders
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,22 +8,22 @@ import androidx.lifecycle.viewModelScope
 import com.example.drones.data.model.Order
 import com.example.drones.data.network.SupabaseService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class OrdersViewModel @Inject constructor(
     private val supabaseService: SupabaseService
 ) : ViewModel() {
-    var state by mutableStateOf(HomeState())
+    var orders by mutableStateOf(listOf<Order>())
 
-    fun createOrder() {
+    fun load() {
         viewModelScope.launch {
-            supabaseService.createOrder(Order(
-                from = state.pickupLocation,
-                to = state.deliveringLocation,
-                service = state.service.name
-            ))
+            withContext(Dispatchers.IO) {
+                orders = supabaseService.getOrders()
+            }
         }
     }
 }
